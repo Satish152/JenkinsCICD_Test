@@ -22,10 +22,11 @@ import cicd.utilities.ExcelRead;
 import cicd.utilities.PropertyReader;
 
 public class BrowserBase {
-	public RemoteWebDriver driver;
+	public WebDriver driver;
 	public Reports reports;
 	public ExtentTest extentTest;
 	public ExtentReports extentreport;
+    
 	public ExcelRead excelRead;
 	public ExcelRead excelRead1;
 	public PropertyReader propertyReader;

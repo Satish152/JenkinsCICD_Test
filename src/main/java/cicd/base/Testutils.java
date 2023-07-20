@@ -26,7 +26,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Testutils {
 
-	public static ThreadLocal<RemoteWebDriver> driver=new ThreadLocal<RemoteWebDriver>();
+	public static ThreadLocal<WebDriver> driver=new ThreadLocal<WebDriver>();
 	public static ThreadLocal<ExtentReports> reporter=new ThreadLocal<ExtentReports>();
 	public static ThreadLocal<ExtentTest> extentTest=new ThreadLocal<ExtentTest>();
 	public static Properties prop;
@@ -55,19 +55,17 @@ public class Testutils {
 				//String url=Paths.get(new Testutils().getClass().getClassLoader().getResource("chrome/chromedriver.exe").toURI()).toFile().getAbsolutePath();
 				new DesiredCapabilities();
 				caps=DesiredCapabilities.chrome();
+				WebDriverManager.chromedriver().setup();
 				ChromeOptions options=new ChromeOptions();
 				caps.merge(options);
 			}else if(prop.get("execution_browser").toString().equalsIgnoreCase("Firefox")){
 				new DesiredCapabilities();
 				caps=DesiredCapabilities.firefox();
+				WebDriverManager.firefoxdriver().setup();
 				FirefoxOptions options=new FirefoxOptions();
 				caps.merge(options);
 			}
-			try {
-				driver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),caps));
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-			}
+			driver.set(new ChromeDriver(caps));
 		}else{
 			if(prop.get("execution_browser").toString().equalsIgnoreCase("chrome")){
 				new DesiredCapabilities();
@@ -89,7 +87,7 @@ public class Testutils {
 		}
 	}
 	
-	public static RemoteWebDriver getDriver(){
+	public static WebDriver getDriver(){
 		return driver.get();
 	}
 	
@@ -124,11 +122,7 @@ public class Testutils {
 				FirefoxOptions options=new FirefoxOptions();
 				caps.merge(options);
 			}
-			try {
-				driver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),caps));
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-			}
+			driver.set(new ChromeDriver(caps));
 		}else{
 			if(browserName.equalsIgnoreCase("chrome")){
 				new DesiredCapabilities();
