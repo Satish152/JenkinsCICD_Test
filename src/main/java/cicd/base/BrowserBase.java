@@ -57,7 +57,7 @@ public class BrowserBase {
 				 * { //This for loop when same test case calling multiple
 				 * methods
 				 */
-				logger.log(Level.INFO,"********Testcase execution Started : "+testCaseDesc+" *******");
+				logger.log(Level.INFO,"*******Testcase execution Started : "+testCaseDesc+" *******");
 				Testutils.setDriver();
 				setUpTestResult();
 				driver = Testutils.getDriver();
